@@ -1,4 +1,4 @@
-import { validateDirectory } from './validate';
+import { validateDirectory } from './validate/index.ts';
 
 const TEMPLATE_DIRECTORY_NAME = 'templates'
 
