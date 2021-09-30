@@ -1,0 +1,14 @@
+name: Validate template
+
+description: Validate ADF template
+
+inputs:
+  path:
+    required: true
+    description: Project root
+
+runs:
+  using: composite
+  steps:
+    - run: deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }}
+      shell: bash
