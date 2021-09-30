@@ -1,12 +1,11 @@
-import Context from '../Context.ts';
-import { ValidateResult } from '../types.ts';
+import Template from '../model/Template.ts'
 
-const validateDirectory = (path: string): ValidateResult => {
-    const ctx = new Context()
+const validateDirectory = (path: string): any => {
+    const templates: Template[] = []
     for (const dirEntry of Deno.readDirSync(path)) {
-        console.log(dirEntry.name)
+        templates.push(new Template(`${path}/${dirEntry.name}`))
     }
-    return ctx.toResult()
+    console.log(templates)
 }
 
 export default validateDirectory

@@ -1,3 +1,3 @@
-import validateDirectory from './validate-directory.ts';
+import validateDirectory from './validate-directory.ts'
 
 export { validateDirectory }
