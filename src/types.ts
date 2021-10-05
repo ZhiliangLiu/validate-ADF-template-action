@@ -5,9 +5,9 @@ export type JsonValueType = JsonValueBasicType | (JsonValueBasicType)[] | Record
 export type Rule<T extends JsonValueType = JsonValueType> = {
     name?: string
     description?: string
-    test: string | RegExp | ((current: string, parents: string[]) => boolean)
-    depth?: number
-    validator: (value: T) => boolean
+    test: string | RegExp | ((current: string, parents: string[]) => boolean) | true
+    depth?: number | [number, number]
+    validator: (value: T) => (boolean | Error)
 }
 
 export enum Status {
@@ -15,4 +15,7 @@ export enum Status {
     SUCCESS
 }
 
-export type ValidateResult = unknown
+export type ValidateResult = {
+    status: Status
+    errors: { rule: Rule; message: string }[]
+}
