@@ -7,6 +7,14 @@ inputs:
     required: true
     description: Project root
 
+outputs:
+  status:
+    description: Validate status
+    value: ${{ steps.parse-result.outputs.status }}
+  detail:
+    description: Validate detail
+    value: ${{ steps.parse-result.outputs.detail }}
+
 runs:
   using: composite
   steps:
@@ -28,10 +36,3 @@ runs:
         echo ::set-output name=status::$status
         echo ::set-output name=detail::$detail
       shell: bash
-
-    - name: Create comment
-      if: steps.parse-result.outputs.status != 0
-      uses: peter-evans/create-or-update-comment@v1
-      with:
-        issue-number: ${{ github.event.pull_request.number }}
-        body: ${{ steps.parse-result.outputs.detail }}
