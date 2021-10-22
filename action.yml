@@ -21,6 +21,7 @@ runs:
       shell: bash
 
     - name: Parse Result
+      id: parse-result
       run: |
         status=${{ fromJSON(steps.validate-template.outputs.result).status }}
         detail=${{ fromJSON(steps.validate-template.outputs.result).detail }}
@@ -32,4 +33,4 @@ runs:
       uses: peter-evans/create-or-update-comment@v1
       with:
         issue-number: ${{ github.event.pull_request.number }}
-        body: ${{ steps.validate-template.outputs.detail }}
+        body: ${{ steps.parse-result.outputs.detail }}
