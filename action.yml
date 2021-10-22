@@ -31,8 +31,6 @@ runs:
     - name: Parse Result
       id: parse-result
       run: |
-        status=${{ fromJSON(steps.validate-template.outputs.result).status }}
-        detail=${{ fromJSON(steps.validate-template.outputs.result).detail }}
-        echo "::set-output name=status::$status"
-        echo "::set-output name=detail::$detail"
+        echo "::set-output name=status::${{ fromJSON(steps.validate-template.outputs.result).status }}"
+        echo "::set-output name=detail::${{ fromJSON(steps.validate-template.outputs.result).detail }}"
       shell: bash
