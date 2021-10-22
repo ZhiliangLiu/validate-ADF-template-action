@@ -23,9 +23,7 @@ runs:
 
     - name: Validate template
       id: validate-template
-      run: |
-        result=$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }})
-        echo "::set-output name=result::$result"
+      run: echo "::set-output name=result::$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }})"
       shell: bash
 
     - name: Parse Result
