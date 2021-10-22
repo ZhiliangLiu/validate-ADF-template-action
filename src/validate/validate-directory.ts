@@ -1,8 +1,8 @@
-import Template from '../model/Template.ts'
-
 const validateDirectory = (path: string): any => {
-    const templates: Template[] = Array.from(Deno.readDirSync(path)).map((dirEntry) => new Template(`${path}/${dirEntry.name}`))
-    console.log(templates)
+    return {
+        status: 1,
+        detail: 'this is a test'
+    }
 }
 
 export default validateDirectory

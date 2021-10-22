@@ -10,5 +10,22 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }}
+    - name: Setup Deno environment
+      uses: denolib/setup-deno@v2.3.0
+
+    - name: Validate template
+      id: validate-template
+      run: |
+        result=$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }})
+        status=${{ fromJSON($result).status }}
+        detail=${{ fromJSON($result).detail }}
+        echo ::set-output name=status::$status
+        echo ::set-output name=detail::$detail
       shell: bash
+
+    - name: Create comment
+      if: ${{ steps.validate-template.outputs.status != 0 }}
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body: ${{ steps.validate-template.outputs.detail }}
