@@ -17,14 +17,18 @@ runs:
       id: validate-template
       run: |
         result=$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }})
-        status=${{ fromJSON($result).status }}
-        detail=${{ fromJSON($result).detail }}
+        echo ::set-output name=result::$result
+      shell: bash
+
+    - name: Parse Result
+      run: |
+        status=${{ fromJSON(steps.validate-template.outputs.result).status }}
+        detail=${{ fromJSON(steps.validate-template.outputs.result).detail }}
         echo ::set-output name=status::$status
         echo ::set-output name=detail::$detail
       shell: bash
 
     - name: Create comment
-      if: ${{ steps.validate-template.outputs.status != 0 }}
       uses: peter-evans/create-or-update-comment@v1
       with:
         issue-number: ${{ github.event.pull_request.number }}
