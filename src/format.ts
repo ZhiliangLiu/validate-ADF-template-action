@@ -11,21 +11,21 @@ const formatter = {
 const formatResult = (result: Result): string => {
 	const details: string[] = [];
 	details.push(
-		`### Template **${result.template}** has ***${result.errors.length}*** ${
+		`### Template **"${result.template}"** has ***${result.errors.length}*** ${
 			result.errors.length > 1 ? 'errors' : 'error'
 		} and ***${result.warnings.length}*** ${
 			result.warnings.length > 1 ? 'warnings' : 'warning'
 		}`,
 	);
 	if (result.hasError) {
-		details.push('#### Errors');
+		details.push('#### errors:');
 		result.errors.forEach((error) =>
 			details.push(formatter[error.code](error))
 		);
 		details.push(EOL);
 	}
 	if (result.hasWarning) {
-		details.push('#### Warnings');
+		details.push('#### warnings:');
 		result.warnings.forEach((warning) =>
 			details.push(formatter[warning.code](warning))
 		);
