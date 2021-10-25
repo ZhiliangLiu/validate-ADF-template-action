@@ -12,7 +12,7 @@ const main = () => {
 	// );
 	Deno.writeAllSync(
 		Deno.stdout,
-		new TextEncoder().encode(JSON.stringify({ status: 0, detail: Array.from(Deno.args) })),
+		new TextEncoder().encode(JSON.stringify({ status: 0, detail: Array.from(Deno.args).toString() })),
 	);
 };
 
