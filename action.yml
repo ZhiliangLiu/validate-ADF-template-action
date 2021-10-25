@@ -22,7 +22,7 @@ runs:
       uses: denolib/setup-deno@v2.3.0
 
     - name: Git pull
-      run: git pull
+      run: git remote update origin --prune
       shell: bash
 
     - name: Validate template
