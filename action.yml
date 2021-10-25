@@ -21,8 +21,15 @@ runs:
     - name: Setup Deno environment
       uses: denolib/setup-deno@v2.3.0
 
-    - name: Git pull
+    - name: Update remote
       run: git remote update origin --prune
+      shell: bash
+
+    - name: Diff
+      id: diff
+      run: |
+        changes=$(git diff origin/main --only-name templates)
+        echo "::set-output name=changes::$changes"
       shell: bash
 
     - name: Validate template
