@@ -21,7 +21,12 @@ runs:
     - name: Setup Deno environment
       uses: denolib/setup-deno@v2.3.0
 
+    - name: Git diff
+      id: git-diff
+      run: echo "::set-output name=changes::$(git diff main --name-only ${{ inputs.path }}/templates)"
+
+
     - name: Validate template
       id: validate-template
-      run: echo "::set-output name=result::$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }})"
+      run: echo "::set-output name=result::$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ steps.git-diff.outputs.changes }})"
       shell: bash

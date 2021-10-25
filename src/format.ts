@@ -5,7 +5,7 @@ const EOL = '\n';
 
 const formatter = {
 	[ErrorCode.ITEM_IS_NULL_OR_EMPTY]: (item: ItemIsNullOrEmpty): string =>
-		`- "${item.key}" is null or empty`,
+		`- "${item.key}" field is not specified. Do you want to add it?`,
 };
 
 const formatResult = (result: Result): string => {
