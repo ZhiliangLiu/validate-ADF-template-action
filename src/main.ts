@@ -11,6 +11,10 @@ const main = () => {
 	// 	Deno.stdout,
 	// 	new TextEncoder().encode(JSON.stringify(result)),
 	// );
+	Deno.writeAllSync(
+		Deno.stdout,
+		new TextEncoder().encode(JSON.stringify({ status: 0, detail: 'asdfasdf' })),
+	);
 };
 
 main();
