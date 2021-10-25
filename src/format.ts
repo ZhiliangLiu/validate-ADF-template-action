@@ -1,11 +1,10 @@
 import Result from './Result.ts';
 import { ErrorCode, ItemIsNullOrEmpty, ValidateResult } from './types.ts';
-
-const EOL = '\n';
+import { EOL } from 'https://deno.land/std@0.112.0/fs/mod.ts';
 
 const formatter = {
 	[ErrorCode.ITEM_IS_NULL_OR_EMPTY]: (item: ItemIsNullOrEmpty): string =>
-		`- ${item.key} is null or empty`,
+		`- "${item.key}" is null or empty`,
 };
 
 const formatResult = (result: Result): string => {
