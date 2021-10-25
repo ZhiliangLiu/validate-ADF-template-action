@@ -21,6 +21,10 @@ runs:
     - name: Setup Deno environment
       uses: denolib/setup-deno@v2.3.0
 
+    - name: Git pull
+      run: git pull
+      shell: bash
+
     - name: Validate template
       id: validate-template
       run: echo "::set-output name=result::$(deno run --allow-read ${{ github.action_path }}/src/main.ts abc)"
