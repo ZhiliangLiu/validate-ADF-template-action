@@ -26,7 +26,7 @@ runs:
       run: echo "::set-output name=result::$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }})"
       shell: bash
 
-    - name: Parse result
+    - name: Parse Result
       id: parse-result
       run: |
         echo "::set-output name=status::${{ fromJSON(steps.validate-template.outputs.result).status }}"
