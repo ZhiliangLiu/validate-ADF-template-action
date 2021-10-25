@@ -27,7 +27,9 @@ runs:
 
     - name: Git diff
       id: git-diff
-      run: echo "::set-output name=changes::$(git diff origin/main --name-only ${{ inputs.path }}/templates)"
+      run: |
+        changes="$(git diff origin/main --name-only ${{ inputs.path }}/templates)"
+        echo "::set-output name=changes::$changes"
       shell: bash
 
     - name: Validate template
