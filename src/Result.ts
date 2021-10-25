@@ -1,6 +1,8 @@
+import { ResultItem } from './types.ts';
+
 class Result {
-	readonly #warnings = [];
-	readonly #errors = [];
+	readonly #warnings: ResultItem[] = [];
+	readonly #errors: ResultItem[] = [];
 
 	public get hasWarning(): boolean {
 		return this.#warnings.length > 0;

@@ -1,5 +1,6 @@
-import { JsonValue } from './types.ts';
+import { ErrorCode, JsonValue } from './types.ts';
 import Result from './Result.ts';
+import { arrayIsNullOrEmpty } from './utils.ts';
 
 class Template {
 	readonly #name: string;
@@ -30,6 +31,24 @@ class Template {
 		const result = new Result(this.#name);
 		if (this.isEmpty) {
 		} else {
+			if (arrayIsNullOrEmpty(this.#manifest!.annotations)) {
+				result.warnings.push({
+					key: 'annotations',
+					code: ErrorCode.ITEM_IS_NULL_OR_EMPTY,
+				});
+			}
+			if (arrayIsNullOrEmpty(this.#manifest!.services)) {
+				result.warnings.push({
+					key: 'services',
+					code: ErrorCode.ITEM_IS_NULL_OR_EMPTY,
+				});
+			}
+			if (arrayIsNullOrEmpty(this.#manifest!.categories)) {
+				result.warnings.push({
+					key: 'categories',
+					code: ErrorCode.ITEM_IS_NULL_OR_EMPTY,
+				});
+			}
 		}
 		return result;
 	}
