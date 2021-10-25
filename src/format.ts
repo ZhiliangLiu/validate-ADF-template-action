@@ -5,7 +5,7 @@ const EOL = '\n';
 
 const formatter = {
 	[ErrorCode.ITEM_IS_NULL_OR_EMPTY]: (item: ItemIsNullOrEmpty): string =>
-		`- ${item.code} is null or empty`,
+		`- ${item.key} is null or empty`,
 };
 
 const formatResult = (result: Result): string => {
