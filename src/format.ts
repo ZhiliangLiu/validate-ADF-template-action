@@ -1,6 +1,7 @@
 import Result from './Result.ts';
 import { ErrorCode, ItemIsNullOrEmpty, ValidateResult } from './types.ts';
-import { EOL } from 'https://deno.land/std@0.112.0/fs/mod.ts';
+
+const EOL = '\n';
 
 const formatter = {
 	[ErrorCode.ITEM_IS_NULL_OR_EMPTY]: (item: ItemIsNullOrEmpty): string =>
