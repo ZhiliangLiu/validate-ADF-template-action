@@ -10,10 +10,10 @@ inputs:
 outputs:
   status:
     description: Validate status
-    value: ${{ fromJSON(steps.validate-template.outputs.result).status }}
+    value: ${{ steps.parse-result.outputs.status }}
   detail:
     description: Validate detail
-    value: ${{ fromJSON(steps.validate-template.outputs.result).detail }}
+    value: ${{ steps.parse-result.outputs.detail }}
 
 runs:
   using: composite
@@ -35,4 +35,11 @@ runs:
     - name: Validate template
       id: validate-template
       run: echo "::set-output name=result::$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ steps.git-diff.outputs.changes }})"
+      shell: bash
+
+    - name: Parse Result
+      id: parse-result
+      run: |
+        echo "::set-output name=status::${{ fromJSON(steps.validate-template.outputs.result).status }}"
+        echo "::set-output name=detail::${{ fromJSON(steps.validate-template.outputs.result).detail }}"
       shell: bash
