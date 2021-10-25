@@ -27,9 +27,7 @@ runs:
 
     - name: Diff
       id: diff
-      run: |
-        changes=$(git diff origin/main --only-name templates)
-        echo "::set-output name=changes::$changes"
+      run: git diff origin/main --only-name templates
       shell: bash
 
     - name: Validate template
