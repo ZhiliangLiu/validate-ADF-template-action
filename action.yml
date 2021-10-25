@@ -10,27 +10,18 @@ inputs:
 outputs:
   status:
     description: Validate status
-    value: ${{ steps.parse-result.outputs.status }}
+    value: ${{ fromJSON(steps.validate-template.outputs.result).status }}
   detail:
     description: Validate detail
-    value: ${{ steps.parse-result.outputs.detail }}
+    value: ${{ fromJSON(steps.validate-template.outputs.result).detail }}
 
 runs:
   using: composite
   steps:
     - name: Setup Deno environment
       uses: denolib/setup-deno@v2.3.0
-      with:
-        deno-version: "~1.14"
 
     - name: Validate template
       id: validate-template
       run: echo "::set-output name=result::$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }})"
-      shell: bash
-
-    - name: Parse Result
-      id: parse-result
-      run: |
-        echo "::set-output name=status::${{ fromJSON(steps.validate-template.outputs.result).status }}"
-        echo "::set-output name=detail::${{ fromJSON(steps.validate-template.outputs.result).detail }}"
       shell: bash
