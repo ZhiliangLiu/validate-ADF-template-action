@@ -25,12 +25,7 @@ runs:
       run: git remote update origin --prune
       shell: bash
 
-    - name: Diff
-      id: diff
-      run: git diff origin/main --only-name templates
-      shell: bash
-
     - name: Validate template
       id: validate-template
-      run: echo "::set-output name=result::$(deno run --allow-read ${{ github.action_path }}/src/main.ts abc)"
+      run: echo "::set-output name=result::$(deno run --allow-read ${{ github.action_path }}/src/main.ts ${{ inputs.path }})"
       shell: bash
