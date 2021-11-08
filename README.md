@@ -1,1 +1,1 @@
-# validate-ADF-template-actioon
+# data-factory-validate-template-action
