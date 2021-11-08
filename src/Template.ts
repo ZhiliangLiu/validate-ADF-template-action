@@ -30,6 +30,7 @@ class Template {
 	public validate(): Result {
 		const result = new Result(this.#name);
 		if (this.isEmpty) {
+			// todo: add something
 		} else {
 			if (arrayIsNullOrEmpty(this.#manifest!.annotations)) {
 				result.warnings.push({
