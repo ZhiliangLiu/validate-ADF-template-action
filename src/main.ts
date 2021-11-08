@@ -1,10 +1,11 @@
 import validate from './validate.ts';
 
-const TEMPLATE_DIRECTORY_NAME = 'templates';
+const DEFAULT_TEMPLATE_DIRECTORY = 'templates';
 
 const main = () => {
 	const PROJECT_ROOT = Deno.args[0];
-	const TEMPLATES_PATH = `${PROJECT_ROOT}/${TEMPLATE_DIRECTORY_NAME}`;
+	const TEMPLATE_DIRECTORY = Deno.args[1];
+	const TEMPLATES_PATH = `${PROJECT_ROOT}/${TEMPLATE_DIRECTORY ?? DEFAULT_TEMPLATE_DIRECTORY}`;
 	const result = validate(TEMPLATES_PATH);
 	Deno.writeAllSync(
 		Deno.stdout,
